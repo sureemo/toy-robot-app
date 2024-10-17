@@ -2,9 +2,11 @@
   "name": "toy-robot-app",
   "version": "1.0.0",
   "description": "Toy Robot App",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Sureerat P. <sureemo@gmail.com>",
