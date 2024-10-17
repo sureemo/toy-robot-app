@@ -17,6 +17,11 @@ describe('Toy Robot Movement Tests', () => {
     test('getCurrentPosition should return default position 0,0,NORTH', () => {
       const robot1 = ToyRobot.getInstance();
       expect(robot1.getCurrentPosition()).toBe('0,0,NORTH');
-    })
+    });
+
+    test('Set position and direction', () => {
+      robot.place(1, 2, 'WEST');
+      expect(robot.getCurrentPosition()).toBe('1,2,WEST');
+    });
   });
 });

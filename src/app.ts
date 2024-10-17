@@ -17,6 +17,7 @@ function initializeReadline(): void {
   console.log('(Available DIRECTION: NORTH, EAST, SOUTH, WEST)');
 
   rl.on('line', (input) => {
+    robot.place(2,2,'SOUTH');
     console.log(robot.getCurrentPosition());
   });
 }
