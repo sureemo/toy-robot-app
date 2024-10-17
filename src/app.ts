@@ -17,8 +17,12 @@ function initializeReadline(): void {
   console.log('(Available DIRECTION: NORTH, EAST, SOUTH, WEST)');
 
   rl.on('line', (input) => {
-    robot.place(2,2,'SOUTH');
-    console.log(robot.getCurrentPosition());
+    try {
+      robot.place(7,2,'SOUTH');
+      console.log(robot.getCurrentPosition());
+    } catch (error: any) {
+      console.error(`The command is ignored: ${error.message}`);
+    }
   });
 }
 

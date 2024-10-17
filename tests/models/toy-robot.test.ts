@@ -19,9 +19,19 @@ describe('Toy Robot Movement Tests', () => {
       expect(robot1.getCurrentPosition()).toBe('0,0,NORTH');
     });
 
-    test('Set position and direction', () => {
-      robot.place(1, 2, 'WEST');
-      expect(robot.getCurrentPosition()).toBe('1,2,WEST');
+    describe('place command', () => {
+      test('should set the new position and direction', () => {
+        robot.place(1, 2, 'WEST');
+        expect(robot.getCurrentPosition()).toBe('1,2,WEST');
+      });
+
+      test('should throw error if set new position out of boundary and position is not changed', () => {
+        expect(() => {
+          robot.place(7, 2, 'WEST')
+        }).toThrow('Invalid coordinates. The table size is 5x5.');
+
+        expect(robot.getCurrentPosition()).toBe('1,2,WEST');
+      });
     });
   });
 });
