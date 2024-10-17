@@ -26,10 +26,6 @@ export class ToyRobot {
     return ToyRobot.instance;
   }
 
-  getCurrentPosition(): string {
-    return `${this.position.toString()},${this.direction.toString()}`;
-  }
-
   private getDirectionState(direction: string): DirectionState {
     switch (direction.toUpperCase()) {
       case DirectionEnum.NORTH: return new NorthState();
@@ -40,7 +36,7 @@ export class ToyRobot {
     }
   }
 
-  place(x: number, y: number, direction: string): void {
+  set(x: number, y: number, direction: string): void {
     if (x < 0 || x >= TABLE_BOUNDARIES.x || y < 0 || y >= TABLE_BOUNDARIES.y) {
       throw new Error("Invalid coordinates. The table size is 5x5.");
     }
@@ -59,5 +55,9 @@ export class ToyRobot {
 
   right(): void {
     this.direction = this.direction.turnRight();
+  }
+
+  getCurrentPosition(): string {
+    return `${this.position.toString()},${this.direction.toString()}`;
   }
 }

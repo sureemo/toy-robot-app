@@ -1,8 +1,9 @@
 import * as readline from 'node:readline';
 import { ToyRobot } from './models/toy-robot';
-import { CommandEnum } from './enums/commands.enum';
+import { CommandFactory } from './command-factory';
 
 const robot = ToyRobot.getInstance();
+const commandFactory = new CommandFactory(robot);
 
 /**
  * Init prompt for accept the input from the user
@@ -20,35 +21,8 @@ function initializeReadline(): void {
 
   rl.on('line', (input) => {
     try {
-      const [command, params] = input.split(' ');
-
-      if (!command) {
-        return;
-      }
-
-      switch (command.toUpperCase()) {
-        case CommandEnum.PLACE:
-          const [x, y, direction] = params.split(',');
-          if (!x || !y || !direction) {
-            throw new Error("Invalid command");
-          }
-          robot.place(Number(x), Number(y), direction);
-          break;
-        case CommandEnum.MOVE:
-          robot.move();
-          break;
-        case CommandEnum.LEFT:
-          robot.left();
-          break;
-        case CommandEnum.RIGHT:
-          robot.right();
-          break;
-        case CommandEnum.REPORT:
-          console.log(robot.getCurrentPosition());
-          break;
-        default:
-          throw new Error("Invalid command");
-      }
+      const command = commandFactory.createCommand(input);
+      command.execute();
     } catch (error: any) {
       console.error(`The command is ignored: ${error.message}`);
     }
