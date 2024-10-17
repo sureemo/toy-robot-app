@@ -49,9 +49,15 @@ export class ToyRobot {
     this.direction = this.getDirectionState(direction);
   }
 
-  move(): void {}
+  move(): void {
+    this.position = this.direction.move(this.position);
+  }
 
-  left(): void {}
+  left(): void {
+    this.direction = this.direction.turnLeft();
+  }
 
-  right(): void {}
+  right(): void {
+    this.direction = this.direction.turnRight();
+  }
 }
