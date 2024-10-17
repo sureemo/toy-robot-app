@@ -1,15 +1,22 @@
 import { Position } from './position';
+import {
+  DirectionState,
+  NorthState,
+  EastState,
+  SouthState,
+  WestState,
+} from './direction-state';
 import { DirectionEnum } from '../enums/directions.enum';
 import { TABLE_BOUNDARIES } from '../app.constant';
 
 export class ToyRobot {
   private static instance: ToyRobot | null = null;
   private position: Position;
-  private direction: string;
+  private direction: DirectionState;
 
   private constructor() {
     this.position = new Position(0, 0);
-    this.direction = DirectionEnum.NORTH;
+    this.direction = new NorthState();
   }
 
   static getInstance(): ToyRobot {
@@ -20,7 +27,17 @@ export class ToyRobot {
   }
 
   getCurrentPosition(): string {
-    return `${this.position.toString()},${this.direction}`;
+    return `${this.position.toString()},${this.direction.toString()}`;
+  }
+
+  private getDirectionState(direction: string): DirectionState {
+    switch (direction.toUpperCase()) {
+      case DirectionEnum.NORTH: return new NorthState();
+      case DirectionEnum.EAST: return new EastState();
+      case DirectionEnum.SOUTH: return new SouthState();
+      case DirectionEnum.WEST: return new WestState();
+      default: throw new Error("Invalid direction");
+    }
   }
 
   place(x: number, y: number, direction: string): void {
@@ -29,7 +46,7 @@ export class ToyRobot {
     }
 
     this.position = new Position(x, y);
-    this.direction = direction;
+    this.direction = this.getDirectionState(direction);
   }
 
   move(): void {}

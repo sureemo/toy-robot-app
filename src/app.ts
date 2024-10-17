@@ -18,7 +18,7 @@ function initializeReadline(): void {
 
   rl.on('line', (input) => {
     try {
-      robot.place(7,2,'SOUTH');
+      robot.place(2,2,'SOUTH');
       console.log(robot.getCurrentPosition());
     } catch (error: any) {
       console.error(`The command is ignored: ${error.message}`);
