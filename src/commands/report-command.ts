@@ -5,6 +5,6 @@ export class ReportCommand implements Command {
   constructor(private robot: ToyRobot) {}
 
   execute() {
-    console.log(this.robot.getCurrentPosition());
+    console.log(`Output: ${this.robot.getCurrentPosition()}`);
   }
 }

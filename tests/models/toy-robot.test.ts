@@ -1,6 +1,6 @@
 import { ToyRobot } from '../../src/models/toy-robot';
 
-describe('Toy Robot Model Tests', () => {
+describe('ToyRobot Tests', () => {
   let robot: ToyRobot;
 
   beforeEach(() => {
@@ -34,31 +34,31 @@ describe('Toy Robot Model Tests', () => {
   });
 
   describe('move', () => {
-    test('should move up if north', () => {
+    test('should increase y if north', () => {
       robot.set(1, 1, 'NORTH');
       robot.move();
       expect(robot.getCurrentPosition()).toBe('1,2,NORTH');
     });
 
-    test('should move down if south', () => {
+    test('should decrease y if south', () => {
       robot.set(1, 1, 'SOUTH');
       robot.move();
       expect(robot.getCurrentPosition()).toBe('1,0,SOUTH');
     });
 
-    test('should move right if east', () => {
+    test('should increase x if east', () => {
       robot.set(1, 1, 'EAST');
       robot.move();
       expect(robot.getCurrentPosition()).toBe('2,1,EAST');
     });
 
-    test('should move left if west', () => {
+    test('should decrease x if west', () => {
       robot.set(1, 1, 'WEST');
       robot.move();
       expect(robot.getCurrentPosition()).toBe('0,1,WEST');
     });
 
-    test('should not move if new position is out of boundary', () => {
+    test('should have no change if new position is out of boundary', () => {
       robot.set(1, 4, 'NORTH');
       robot.move();
       expect(robot.getCurrentPosition()).toBe('1,4,NORTH');
