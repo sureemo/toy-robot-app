@@ -1,4 +1,7 @@
 import * as readline from 'node:readline';
+import { ToyRobot } from './models/toy-robot';
+
+const robot = ToyRobot.getInstance();
 
 /**
  * Init prompt for accept the input from the user
@@ -14,7 +17,7 @@ function initializeReadline(): void {
   console.log('(Available DIRECTION: NORTH, EAST, SOUTH, WEST)');
 
   rl.on('line', (input) => {
-    console.log(input);
+    console.log(robot.getCurrentPosition());
   });
 }
 
