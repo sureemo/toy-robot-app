@@ -6,6 +6,7 @@ import { ReportCommand } from './commands/report-command';
 import { LeftCommand } from './commands/left-command';
 import { RightCommand } from './commands/right-command';
 import { CommandEnum } from './enums/commands.enum';
+import { validateInput } from './utils/validation';
 
 export class CommandFactory {
   private robot: ToyRobot;
@@ -19,6 +20,7 @@ export class CommandFactory {
 
     switch (command.toUpperCase()) {
       case CommandEnum.PLACE:
+        validateInput(params);
         const [x, y, direction] = params.split(',');
         return new PlaceCommand(this.robot, parseInt(x), parseInt(y), direction);
       case CommandEnum.MOVE:

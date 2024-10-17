@@ -20,6 +20,10 @@ function initializeReadline(): void {
   console.log('To exit, please press Ctrl+c');
 
   rl.on('line', (input) => {
+    if (!input) {
+      return;
+    }
+
     try {
       const command = commandFactory.createCommand(input);
       command.execute();
